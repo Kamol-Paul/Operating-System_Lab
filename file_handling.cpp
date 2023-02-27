@@ -11,18 +11,12 @@ void print_file_in_directory(char* dir_name){
     for (const auto & entry : std::filesystem::directory_iterator(path)){
         cout << entry.path() << endl;
     }
-
-//    DIR *dr;
-//    struct dirent *en;
-//    dr = opendir(dir_name);
-
-//    if (dr) {
-//       while ((en = readdir(dr)) != NULL) {
-//          printf("%s\n", en->d_name);
-//           //closedir(dr);
-//         }
-//         closedir(dr);
-//    }
+}
+void print_directory(char* dir_name){
+    string path = string(dir_name);
+    for(const auto& it : std::filesystem::directory_iterator(path)){
+        cout << it.path() << endl;
+    }
 }
 void copy(char *from , char *to){
     ifstream ini_file{
@@ -41,6 +35,26 @@ void copy(char *from , char *to){
         cout << "Copy finished" << endl;
     }else cout << "Copy Failed" << endl;
 }
+
+void copy_test(char* from, char* to){
+    ifstream input_file{
+        from, ios_base::in | ios_base::binary
+    };
+
+    ofstream output_file{
+        to, ios_base::out | ios_base::binary
+    };
+    const int buffer_size = 1 << 12;
+    if(input_file && out_file){
+        char buffer[buffer_size];
+        do{
+            input_file.read(&buffer[0], buffer_size);
+            output_file.write((&buffer[0], input_file.gcount();
+        }while(input_file.gcount() > 0);
+        cout << "Copy Finished" << endl;
+    }else cout << "Copy Failed" << endl;
+}
+
 
 int32_t main(int argc, char** argv){
    string line;
